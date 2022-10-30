@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { signIn, signOut, useSession } from "next-auth/react";
 import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useState } from "react";
 import { trpc } from "../utils/trpc";
