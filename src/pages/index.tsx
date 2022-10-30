@@ -1,5 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useState } from "react";
 import { trpc } from "../utils/trpc";
 
 const Messages = () => {
@@ -9,7 +9,7 @@ const Messages = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      {messages?.map((msg, index) => {
+      {messages?.map((msg: { message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; }, index: Key | null | undefined) => {
         return (
           <div key={index}>
             <p>{msg.message}</p>
