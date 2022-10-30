@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { router } from "../trpc";
 import { guestbookRouter } from "./guestbook.ts"
 
