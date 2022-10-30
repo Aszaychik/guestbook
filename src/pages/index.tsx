@@ -46,67 +46,64 @@ const Home = () => {
   }
 
   return (
-    <main className="flex flex-col items-center">
-      <h1 className="text-3xl pt-4">Guestbook</h1>
-      <p>
-        Tutorial for <code>create-t3-app</code>
-      </p>
-
-      <div className="pt-10">
-        {session ? (
-          <div>
-            <p>hi {session.user?.name}</p>
-
-            <button onClick={() => signOut()}>Logout</button>
-
-            <div className="pt-6">
-              <form
-                className="flex gap-2"
-                onSubmit={(event) => {
-                  event.preventDefault();
-
-                  postMessage.mutate({
-                    name: session.user?.name as string,
-                    message,
-                  });
-
-                  setMessage("");
-                }}
-              >
-                <input
-                  type="text"
-                  value={message}
-                  placeholder="Your message..."
-                  minLength={2}
-                  maxLength={100}
-                  onChange={(event) => setMessage(event.target.value)}
-                  className="px-4 py-2 rounded-md border-2 border-zinc-800 bg-neutral-900 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="p-2 rounded-md border-2 border-zinc-800 focus:outline-none"
+    <body>
+      <main className="flex flex-col items-center p-5">
+        <h1 className="text-3xl p-3 rounded">Guestbook App</h1>
+        <p className="mt-5">
+          Tutorial for <code>create-t3-app</code>
+        </p>
+        <div className="pt-10">
+          {session ? (
+            <div>
+              <div className="flex flex-col items-center gap-3">
+                <p className="">Hi <a href={`https://www.facebook.com/${session.user?.name}`} className="text-red-500">{session.user?.name}</a></p>
+                <button className="bg-red-600 p-2 rounded-md hover:bg-red-800" onClick={() => signOut()}>Logout</button>
+              </div>
+              <div className="pt-6">
+                <form
+                  className="flex gap-2"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    postMessage.mutate({
+                      name: session.user?.name as string,
+                      message,
+                    });
+                    setMessage("");
+                  }}
                 >
-                  Submit
-                </button>
-              </form>
+                  <input
+                    type="text"
+                    value={message}
+                    placeholder="Your message..."
+                    minLength={2}
+                    maxLength={100}
+                    onChange={(event) => setMessage(event.target.value)}
+                    className="px-4 py-2 rounded-md border-2 border-zinc-800 bg-neutral-900 focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="p-2 bg-blue-500 rounded-md hover:bg-blue-800 focus:outline-none"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+              <div className="pt-10">
+                <Messages />
+              </div>
             </div>
-
-            <div className="pt-10">
+          ) : (
+            <div>
+              <button onClick={() => signIn("discord")}>
+                Login with Discord
+              </button>
+              <div className="pt-10" />
               <Messages />
             </div>
-          </div>
-        ) : (
-          <div>
-            <button onClick={() => signIn("discord")}>
-              Login with Discord
-            </button>
-
-            <div className="pt-10" />
-            <Messages />
-          </div>
-        )}
-      </div>
-    </main>
+          )}
+        </div>
+      </main>
+    </body>
   );
 };
 
